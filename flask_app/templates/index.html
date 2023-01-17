@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>iMa SmartShopper</title>
+</head>
+<body style="background-image: url('{{url_for('static', filename='img/black-friday-elements-assortment.jpg')}}'); background-size: cover; background-repeat: no-repeat;">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col bg-primary text-white shadow-sm p-3 mb-5 rounded">
+                <h1 class="title">iMa SmartShopper</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border-end">
+                <!-- Sign in form -->
+                <form action="" class="form-signin w-100 m-auto">
+                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                </form>
+            </div>
+            
+            <div class="col">
+                <!-- Register form -->
+                <form action="" class="form-signin w-100 m-auto">
+                    <h1 class="h3 mb-3 fw-normal">Register</h1>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="First Name" name="firstname">
+                        <label for="firstname">First Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Last Name" name="lastname">
+                        <label for="lastname">Last Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingInput" placeholder="Password" name="password">
+                        <label for="Password">Password</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="confirm" name="confirm">
+                        <label for="confirm">Confirm Password</label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-secondary" type="submit">Register</button>
+                    <p class="mt-5 mb-3 text-muted">&copy; Torrei Whitfield 2023</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
