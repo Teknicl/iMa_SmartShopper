@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col border-end">
                 <!-- Sign in form -->
-                <form action="" class="form-signin w-100 m-auto" method="post">
+                <form action="/login" class="form-signin w-100 m-auto" method="post">
                     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
@@ -29,8 +29,17 @@
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                         <label for="password">Password</label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" value="login">Sign in</button>
                 </form>
+                <div>
+                    {% with messages = get_flashed_messages(category_filter=['Register','Login']) %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p class="error">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
             </div>
             
             <div class="col">
@@ -61,7 +70,7 @@
                         <input type="password" class="form-control" id="floatingPassword" placeholder="confirm" name="confirm">
                         <label for="confirm">Confirm Password</label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-secondary" type="submit">Register</button>
+                    <button class="w-100 btn btn-lg btn-secondary" type="submit" value="Register">Register</button>
                     <p class="mt-5 mb-3 text-muted">&copy; Torrei Whitfield 2023</p>
                 </form>
             </div>

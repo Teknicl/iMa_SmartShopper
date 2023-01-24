@@ -40,6 +40,18 @@ class User:
         if len(result) < 1:
             return False
         return cls(result[0])
+
+    @classmethod
+    def get_user_username(cls,username):
+        data = {
+            "username": username
+        }
+        query = "SELECT * FROM user WHERE username = %(username)s;"
+        result = connectToMySQL(db).query_db(query,data)
+
+        if len(result) < 1:
+            return False
+        return cls(result[0])
     
     @classmethod
     def get_user_username(cls,username):
@@ -116,7 +128,7 @@ class User:
     @classmethod
     def authenticated_user_by_input(cls, user_input):
         valid = True
-        existing_user = cls.get_user_email(user_input["email"])
+        existing_user = cls.get_user_username(user_input["username"])
         password_valid = True
 
         if not existing_user:
@@ -127,7 +139,7 @@ class User:
             if not password_valid:
                 valid = False
         if not valid:
-            flash("Email and password does not match.", "Login")
+            flash("Account or password does not match.", "Login")
             return False
 
         return existing_user

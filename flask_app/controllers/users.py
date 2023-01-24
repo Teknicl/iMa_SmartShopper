@@ -15,15 +15,15 @@ def register():
     if not valid_user:
         return redirect('/')
     session['user_id'] = valid_user.id
-    return redirect('/dashboard')
+    return redirect('/shopping_list')
 
 @app.route('/login',methods=['POST'])
 def login():
     valid_user = User.authenticated_user_by_input(request.form)
     if not valid_user:
         return redirect('/')
-    session["member_id"] = valid_user.id
-    return redirect('/dashboard')
+    session["user_id"] = valid_user.id
+    return redirect('/shopping_list')
 
 @app.route('/logout')
 def logout():
