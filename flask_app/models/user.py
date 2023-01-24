@@ -139,7 +139,7 @@ class User:
             if not password_valid:
                 valid = False
         if not valid:
-            flash("Account or password does not match.", "Login")
+            flash("Account or password does not match.", "Signin")
             return False
 
         return existing_user

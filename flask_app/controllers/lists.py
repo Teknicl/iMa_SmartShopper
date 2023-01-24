@@ -7,7 +7,7 @@ from flask import flash
 @app.route("/shopping_list")
 def shopping_list():
     if "user_id" not in session:
-        flash("You must be logged in to access the dashboard.", "Login")
+        flash("You must be signed in to access the dashboard.", "Signin")
         return redirect("/")
 
     user = User.get_user_id(session["user_id"])

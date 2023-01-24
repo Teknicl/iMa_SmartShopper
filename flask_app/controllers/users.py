@@ -17,15 +17,15 @@ def register():
     session['user_id'] = valid_user.id
     return redirect('/shopping_list')
 
-@app.route('/login',methods=['POST'])
-def login():
+@app.route('/signin',methods=['POST'])
+def signin():
     valid_user = User.authenticated_user_by_input(request.form)
     if not valid_user:
         return redirect('/')
     session["user_id"] = valid_user.id
     return redirect('/shopping_list')
 
-@app.route('/logout')
-def logout():
+@app.route('/signout')
+def signout():
     session.clear()
     return redirect('/')
