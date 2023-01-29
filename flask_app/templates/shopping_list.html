@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>iMa SmartShopper - Shopping List</title>
 </head>
-<body>
+<body style="background-image: url('{{url_for('static', filename='img/black-friday-elements-assortment.jpg')}}'); background-size: cover; background-repeat: no-repeat;">
     <div class="container text-center">
         <div class="row">
             <div class="col bg-primary text-white shadow-sm p-3 mb-5 rounded">
@@ -18,16 +18,16 @@
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Add Item</button>
+                <button class="w-100 btn btn-lg btn-primary" type="button" onclick="location.href='/item/add'">Add Item</button>
             </div>
             <div class="col">
-                <a href="/signout">sign out</a>
+                <a href="/signout" class="link-primary">sign out</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <table class="table">
-                    <thead>
+                <table class="table border table-light item-form">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">Item</th>
                             <th scope="col">Qty</th>
@@ -37,15 +37,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for item in list %}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{item.item }}</td>
+                            <td>{{ item.qty }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>{{ item.note }}</td>
                             <td>
-                                <a href="">Edit</a> | <a href="">Delete</a>
+                                <a href="/item/edit/{{item.id}}">Edit</a> | <a href="/item/delete/{{item.id}}">Delete</a>
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

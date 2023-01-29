@@ -52,18 +52,6 @@ class User:
         if len(result) < 1:
             return False
         return cls(result[0])
-    
-    @classmethod
-    def get_user_username(cls,username):
-        data = {
-            "username": username
-        }
-        query = "SELECT * FROM user WHERE username = %(username)s;"
-        result = connectToMySQL(db).query_db(query,data)
-
-        if len(result) < 1:
-            return False
-        return cls(result[0])
 
     @classmethod
     def get_all(cls):
@@ -84,7 +72,7 @@ class User:
         pw_hash = bcrypt.generate_password_hash(user['password'])
         user = user.copy()
         user["password"] = pw_hash
-        print("User after adding pw: ", user)
+        # print("User after adding pw: ", user)
 
         query = """
                 INSERT into user (firstname, lastname, username, email, password)
