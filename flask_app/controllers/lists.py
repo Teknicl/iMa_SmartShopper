@@ -34,6 +34,17 @@ def list_edit_page(list_id):
     list = List.get_by_id(list_id)
     return render_template("edit.html", user=user, list=list)
 
+@app.route("/item/update/<int:list_id>", methods=["POST"])
+def update_list(list_id):
+    if "user_id" not in session:
+        flash("You must be signed in to update items.", "Signin")
+        return redirect("/")
+    valid_list = List.is_valid(request.form)
+    if valid_list:
+        List.update_list(request.form)
+        return redirect(f'/shopping_list')
+    return redirect(f'/item/edit/{list_id}')
+
 @app.route("/shopping_list", methods =["POST"])
 def create_list():
         valid_list = List.create_valid_list(request.form)

@@ -42,14 +42,12 @@ class List:
                 }
             )
             lists.append(list_obj)
-
         return lists
 
     @classmethod
     def create_valid_list(cls, list_dict):
         if not cls.is_valid(list_dict):
             return False
-
         query = "INSERT INTO list (item, category, note, qty, user_id) VALUES (%(item)s, %(category)s, %(note)s, %(qty)s, %(user_id)s);"
         list_id = connectToMySQL(db).query_db(query, list_dict)
         list = cls.get_by_id(list_id)
@@ -68,7 +66,6 @@ class List:
         list_data = connectToMySQL(db).query_db(query,data)
         lists = []
         for list in list_data:
-            # print (list_data)
             list_obj = cls(list)
             list_obj.user = user.User(
                 {
@@ -83,24 +80,18 @@ class List:
                 }
             )
             lists.append(list_obj)
-
         return lists
 
     @classmethod
     def get_by_id(cls, list_id):
-        # print(f"get list by id {list_id}")
         data = {"id": list_id}
         query = """SELECT list.id, list.created_at, list.updated_at, list.item, list.category, list.note, list.qty, user.id as user_id, user.firstname, user.lastname, user.username, user.email, user.password, user.created_at as uc, user.updated_at as uu
         FROM list
         JOIN user on user.id = list.user_id
         WHERE list.id = %(id)s;"""
-
         result = connectToMySQL(db).query_db(query,data)
-        # print("result of query:")
-        # print(result)
         result = result[0]
         list = cls(result)
-        
         list.user = user.User(
                 {
                     "id": result["user_id"],
@@ -112,8 +103,7 @@ class List:
                     "created_at": result["uc"],
                     "updated_at": result["uu"]
                 }
-            )
-            
+            )           
         return list
 
     @classmethod
@@ -121,8 +111,16 @@ class List:
         data = {"id": list_id}
         query = "DELETE from list WHERE id = %(id)s;"
         connectToMySQL(db).query_db(query, data)
-
         return list_id
+    
+    @classmethod
+    def update_list(cls, list_id):
+        if not cls.is_valid(list_id):
+            return False
+        query = "UPDATE list SET item = %(item)s, category = %(category)s, note = %(note)s, qty = %(qty)s WHERE id = %(id)s;"
+        connectToMySQL(db).query_db(query, list_id)
+        list = cls.get_by_id(list_id["id"])
+        return list
 
     @staticmethod
     def is_valid(list_dict):
@@ -132,5 +130,4 @@ class List:
         if len(list_dict["item"]) < 2:
             flash("Item " + flash_string)
             valid = False
-
         return valid
