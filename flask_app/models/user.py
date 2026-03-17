@@ -96,20 +96,20 @@ class User:
             valid = False
         if len(user['username']) <8:
             flash("Username must be at least 8 characters.","Register")
-            is_valid = False    
+            valid = False
         if len(user['password']) <8:
             flash("Password must be at least 8 characters.","Register")
-            is_valid = False
+            valid = False
         if not user['password'] == user['confirm']:
             flash("Password does not match","Register")
             valid = False
         email_already_has_account = User.get_user_email(user['email'])
         if email_already_has_account:
-            flash("email registered to another User.")
+            flash("Email registered to another user.", "Register")
             valid = False
         username_already_has_account = User.get_user_username(user['username'])    
         if username_already_has_account:
-            flash("Username is unavailable.")
+            flash("Username is unavailable.", "Register")
             valid = False
         return valid
 

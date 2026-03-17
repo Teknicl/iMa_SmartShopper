@@ -22,17 +22,17 @@
                 <form action="/signin" class="form-signin w-100 m-auto" method="post">
                     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                        <input type="text" class="form-control" id="signinUsername" placeholder="Username" name="username" value="{{ signin_form.get('username', '') }}">
                         <label for="username">Username</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="signinPassword" placeholder="Password" name="password">
                         <label for="password">Password</label>
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit" value="Signin">Sign in</button>
                 </form>
                 <div>
-                    {% with messages = get_flashed_messages(category_filter=['Register','Signin']) %}
+                    {% with messages = get_flashed_messages(category_filter=['Signin']) %}
                     {% if messages %}
                     {% for message in messages %}
                     <p class="alert alert-danger" role="alert">{{message}}</p>
@@ -47,28 +47,37 @@
                 <form action="/register" class="form-signin w-100 m-auto" method="post">
                     <h1 class="h3 mb-3 fw-normal">Register</h1>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="First Name" name="firstname">
+                        <input type="text" class="form-control" id="registerFirstname" placeholder="First Name" name="firstname" value="{{ register_form.get('firstname', '') }}">
                         <label for="firstname">First Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Last Name" name="lastname">
+                        <input type="text" class="form-control" id="registerLastname" placeholder="Last Name" name="lastname" value="{{ register_form.get('lastname', '') }}">
                         <label for="lastname">Last Name</label>
                     </div>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                        <input type="text" class="form-control" id="registerUsername" placeholder="Username" name="username" value="{{ register_form.get('username', '') }}">
                         <label for="username">Username</label>
                     </div>
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                        <input type="email" class="form-control" id="registerEmail" placeholder="name@example.com" name="email" value="{{ register_form.get('email', '') }}">
                         <label for="email">Email</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingInput" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Password" name="password">
                         <label for="Password">Password</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="confirm" name="confirm">
+                        <input type="password" class="form-control" id="registerConfirm" placeholder="confirm" name="confirm">
                         <label for="confirm">Confirm Password</label>
+                    </div>
+                    <div class="mt-3">
+                        {% with messages = get_flashed_messages(category_filter=['Register']) %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <p class="alert alert-danger" role="alert">{{message}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
                     </div>
                     <button class="w-100 btn btn-lg btn-secondary" type="submit" value="Register">Register</button>
                     <p class="mt-5 mb-3 text-muted">&copy; Torrei Whitfield 2023</p>
