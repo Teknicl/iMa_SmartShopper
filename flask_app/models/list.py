@@ -112,15 +112,21 @@ class List:
         query = "DELETE from list WHERE id = %(id)s;"
         connectToMySQL(db).query_db(query, data)
         return list_id
-    
     @classmethod
-    def update_list(cls, list_id):
-        if not cls.is_valid(list_id):
+    def update_valid_list(cls, list_dict):
+        if not cls.is_valid(list_dict):
             return False
-        query = "UPDATE list SET item = %(item)s, category = %(category)s, note = %(note)s, qty = %(qty)s WHERE id = %(id)s;"
-        connectToMySQL(db).query_db(query, list_id)
-        list = cls.get_by_id(list_id["id"])
-        return list
+
+        query = """
+        UPDATE list
+        SET item = %(item)s,
+            category = %(category)s,
+            note = %(note)s,
+            qty = %(qty)s
+        WHERE id = %(id)s;
+        """
+        connectToMySQL(db).query_db(query, list_dict)
+        return cls.get_by_id(list_dict["id"])
 
     @staticmethod
     def is_valid(list_dict):
@@ -130,4 +136,5 @@ class List:
         if len(list_dict["item"]) < 2:
             flash("Item " + flash_string)
             valid = False
+
         return valid
