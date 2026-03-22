@@ -124,6 +124,22 @@ class List:
 
         return list_id
 
+    @classmethod
+    def update_valid_list(cls, list_dict):
+        if not cls.is_valid(list_dict):
+            return False
+
+        query = """
+        UPDATE list
+        SET item = %(item)s,
+            category = %(category)s,
+            note = %(note)s,
+            qty = %(qty)s
+        WHERE id = %(id)s;
+        """
+        connectToMySQL(db).query_db(query, list_dict)
+        return cls.get_by_id(list_dict["id"])
+
     @staticmethod
     def is_valid(list_dict):
         valid = True

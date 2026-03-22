@@ -41,6 +41,24 @@ def create_list():
             return redirect(f'/shopping_list')
         return redirect(f'/item/add')
 
+@app.route("/item/update/<int:list_id>", methods=["POST"])
+def update_list(list_id):
+    if "user_id" not in session:
+        flash("You must be signed in to update items.", "Signin")
+        return redirect("/")
+
+    update_data = {
+        "id": list_id,
+        "item": request.form["item"],
+        "category": request.form["category"],
+        "note": request.form["note"],
+        "qty": request.form["qty"],
+    }
+    valid_list = List.update_valid_list(update_data)
+    if valid_list:
+        return redirect("/shopping_list")
+    return redirect(f"/item/edit/{list_id}")
+
 @app.route("/item/delete/<int:list_id>")
 def delete_by_id(list_id):
     if "user_id" not in session:
