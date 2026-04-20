@@ -4,50 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>iMa SmartShopper - Add Item</title>
 </head>
-<body style="background-image: url('{{url_for('static', filename='img/black-friday-elements-assortment.jpg')}}'); background-size: cover; background-repeat: no-repeat;">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col bg-primary text-white shadow-sm p-3 mb-5 rounded">
-                <h2 class="title">Add item to {{ user.firstname }}'s shopping list</h2>
+<body class="app-page">
+    <main class="app-shell narrow">
+        <nav class="app-nav" aria-label="Item navigation">
+            <a class="brand-link" href="/shopping_list">iMa SmartShopper</a>
+            <div class="nav-actions">
+                <a href="/shopping_list" class="btn btn-outline-dark">Back</a>
+                <a href="/signout" class="btn btn-outline-dark">Sign out</a>
             </div>
-        <div class="row">
-            <div class="col">
-                <a href="/shopping_list">Back</a>
+        </nav>
+
+        <section class="page-heading">
+            <p class="eyebrow">New item</p>
+            <h1 class="title">Add to {{ user.firstname }}'s list</h1>
+        </section>
+
+        <form action="/shopping_list" class="item-form" method="post">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="itemName" placeholder="Item" name="item">
+                <label for="itemName" class="form-label">Item</label>
             </div>
-            <div class="col"></div>
-            <div class="col">
-                <a href="/signout" class="link-primary">sign out</a>
+            <div class="form-grid">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="itemCategory" placeholder="Category" name="category">
+                    <label for="itemCategory" class="form-label">Category</label>
+                </div>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="itemQty" placeholder="Qty" name="qty">
+                    <label for="itemQty" class="form-label">Qty</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <form action="/shopping_list" class="rounded item-form" method="post">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Item" name="item">
-                        <label for="item" class="form-label">Item</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Category" name="category">
-                        <label for="category" class="form-label">Category</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Note" name="note">
-                        <label for="note" class="form-label">Note</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" id="floatingInput" placeholder="Qty" name="qty">
-                        <label for="qty" class="form-label">Qty</label>
-                    </div>
-                    <input type="submit" value="Add" class="w-50 btn btn-lg btn-primary">
-                    <input type="hidden" name="user_id" value="{{session['user_id']}}">
-                </form>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="itemNote" placeholder="Note" name="note">
+                <label for="itemNote" class="form-label">Note</label>
             </div>
-        </div>
-    </div>
+            <button type="submit" class="btn btn-lg btn-primary">Add Item</button>
+            <input type="hidden" name="user_id" value="{{session['user_id']}}">
+        </form>
+    </main>
 </body>
 </html>

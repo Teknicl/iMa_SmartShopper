@@ -4,86 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>iMa SmartShopper</title>
 </head>
-<body style="background-image: url('{{url_for('static', filename='img/black-friday-elements-assortment.jpg')}}'); background-size: cover; background-repeat: no-repeat;">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col bg-primary text-white shadow-sm p-3 mb-5 rounded">
-                <h1 class="title">iMa SmartShopper</h1>
+<body class="auth-page">
+    <main class="auth-shell">
+        <section class="brand-panel">
+            <p class="eyebrow">Plan smarter. Shop lighter.</p>
+            <h1 class="title brand-title">
+                <span>iMa</span>
+                <span>SmartShopper</span>
+            </h1>
+            <p class="brand-copy">Keep groceries organized by item, category, quantity, and notes so every trip starts with a list that already makes sense.</p>
+            <div class="feature-row" aria-label="App highlights">
+                <span>Fresh lists</span>
+                <span>Fast edits</span>
+                <span>Private account</span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col border-end">
-                <!-- Sign in form -->
-                <form action="/signin" class="form-signin w-100 m-auto" method="post">
-                    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="signinUsername" placeholder="Username" name="username" value="{{ signin_form.get('username', '') }}">
-                        <label for="username">Username</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="signinPassword" placeholder="Password" name="password">
-                        <label for="password">Password</label>
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" value="Signin">Sign in</button>
-                </form>
-                <div>
-                    {% with messages = get_flashed_messages(category_filter=['Signin']) %}
-                    {% if messages %}
+        </section>
+
+        <section class="auth-card" aria-label="Account access">
+            <form action="/signin" class="auth-form" method="post">
+                <div class="form-heading">
+                    <p class="eyebrow">Welcome back</p>
+                    <h2>Sign in</h2>
+                </div>
+
+                {% with messages = get_flashed_messages(category_filter=['Signin']) %}
+                {% if messages %}
+                <div class="message-stack">
                     {% for message in messages %}
                     <p class="alert alert-danger" role="alert">{{message}}</p>
                     {% endfor %}
-                    {% endif %}
-                    {% endwith %}
                 </div>
-            </div>
-            
-            <div class="col">
-                <!-- Register form -->
-                <form action="/register" class="form-signin w-100 m-auto" method="post">
-                    <h1 class="h3 mb-3 fw-normal">Register</h1>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="registerFirstname" placeholder="First Name" name="firstname" value="{{ register_form.get('firstname', '') }}">
-                        <label for="firstname">First Name</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="registerLastname" placeholder="Last Name" name="lastname" value="{{ register_form.get('lastname', '') }}">
-                        <label for="lastname">Last Name</label>
+                {% endif %}
+                {% endwith %}
+
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="signinUsername" placeholder="Username" name="username" value="{{ signin_form.get('username', '') }}">
+                    <label for="signinUsername">Username</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="signinPassword" placeholder="Password" name="password">
+                    <label for="signinPassword">Password</label>
+                </div>
+                <button class="btn btn-lg btn-primary w-100" type="submit" value="Signin">Sign in</button>
+            </form>
+
+            <details class="register-drawer" {% if register_form %}open{% endif %}>
+                <summary>Create a new account</summary>
+                <form action="/register" class="auth-form register-form" method="post">
+                    <div class="form-grid">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="registerFirstname" placeholder="First Name" name="firstname" value="{{ register_form.get('firstname', '') }}">
+                            <label for="registerFirstname">First Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="registerLastname" placeholder="Last Name" name="lastname" value="{{ register_form.get('lastname', '') }}">
+                            <label for="registerLastname">Last Name</label>
+                        </div>
                     </div>
                     <div class="form-floating">
                         <input type="text" class="form-control" id="registerUsername" placeholder="Username" name="username" value="{{ register_form.get('username', '') }}">
-                        <label for="username">Username</label>
+                        <label for="registerUsername">Username</label>
                     </div>
                     <div class="form-floating">
                         <input type="email" class="form-control" id="registerEmail" placeholder="name@example.com" name="email" value="{{ register_form.get('email', '') }}">
-                        <label for="email">Email</label>
+                        <label for="registerEmail">Email</label>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="registerPassword" placeholder="Password" name="password">
-                        <label for="Password">Password</label>
+                    <div class="form-grid">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Password" name="password">
+                            <label for="registerPassword">Password</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="registerConfirm" placeholder="Confirm Password" name="confirm">
+                            <label for="registerConfirm">Confirm Password</label>
+                        </div>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="registerConfirm" placeholder="confirm" name="confirm">
-                        <label for="confirm">Confirm Password</label>
-                    </div>
-                    <div class="mt-3">
-                        {% with messages = get_flashed_messages(category_filter=['Register']) %}
-                        {% if messages %}
+
+                    {% with messages = get_flashed_messages(category_filter=['Register']) %}
+                    {% if messages %}
+                    <div class="message-stack">
                         {% for message in messages %}
                         <p class="alert alert-danger" role="alert">{{message}}</p>
                         {% endfor %}
-                        {% endif %}
-                        {% endwith %}
                     </div>
-                    <button class="w-100 btn btn-lg btn-secondary" type="submit" value="Register">Register</button>
-                    <p class="mt-5 mb-3 text-muted">&copy; Torrei Whitfield 2023</p>
+                    {% endif %}
+                    {% endwith %}
+
+                    <button class="btn btn-lg btn-secondary w-100" type="submit" value="Register">Register</button>
                 </form>
-            </div>
-        </div>
-    </div>
+            </details>
+        </section>
+    </main>
 </body>
 </html>
