@@ -48,6 +48,12 @@
                             <td class="item-note">{{ item.note }}</td>
                             <td>
                                 <div class="table-actions">
+                                    <a
+                                        href="https://www.google.com/search?q={{ (item.item ~ ' ' ~ item.category ~ ' online coupon')|urlencode }}"
+                                        class="coupon-link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >Coupons</a>
                                     <a href="/item/edit/{{item.id}}">Edit</a>
                                     <a href="/item/delete/{{item.id}}" class="danger-link">Delete</a>
                                 </div>
